@@ -9,12 +9,28 @@ function Book(title, author, pages, have_read) {
     }
 };
 
-//Books
+//books
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');
 const prideAndPrejudice = new Book('Pride and Prejudice', 'Jane Austen', '480 pages', 'read');
 const hamlet = new Book('Hamlet', 'William Shakespeare', '400 pages', 'read');
 
+//library
 let myLibrary = [prideAndPrejudice, hamlet];
+
+//add books modal
+let dialog = document.querySelector("dialog");
+let addBookButton = document.getElementById("add-book");
+let closeButton = document.getElementById("close");
+
+//open modal
+addBookButton.onclick = function () {
+    dialog.style.display = "grid"
+}
+//close modal button
+closeButton.onclick = function () {
+    dialog.style.display = "none"
+}
+
 
 //function to loop through books and display on page
 function displayBooks() {
@@ -36,19 +52,13 @@ function displayBooks() {
     container.appendChild(bookPages);
     container.appendChild(haveRead);
 
-    // myLibrary.forEach(book => {
-
-    //     document.getElementById('book-title').textContent = book.title;
-    //     document.getElementById('author').textContent = book.author;
-    //     document.getElementById('page-number').textContent = book.pages;
-    //     document.getElementById('have-read').textContent = book.have_read;
-    // })
-
 };
 
 
 //function to add books to library
 function addBookToLibrary(title, author, pages, have_read) {
+
+    //books
     let newBook = new Book(title, author, pages, have_read)
     let newBookDiv = document.createElement("div");
     myLibrary.push(newBook);

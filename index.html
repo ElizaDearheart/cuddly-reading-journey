@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>Welcome to the Library</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/bookshelf.svg" type="image/svg+xml">
+    <link rel="icon" href="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/images/bookshelf.svg"
+        type="image/svg+xml">
     <script src="library.js" defer></script>
 
 
@@ -14,66 +15,60 @@
 <body>
     <div class="top-header">
         <div class="top-header-logo">
-            <a href="#"><img class="snail" src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/bookshelf.svg"
+            <a href="#"><img class="snail" src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/images/bookshelf.svg"
                     alt="snail in profile pointing right" height="90px" width="90px" /></a>
         </div>
         <div class="search">
-            <img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/magnify.svg"
+            <img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/images/magnify.svg"
                 alt="magnifying glass image on a button" height="30px" width="30px" />
             <input type="search" class="search-bar" aria-label="Search for a book" name="search-input" size="50" />
         </div>
-        <!-- <button type="submit" class="search-button">
-            <img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/magnify.svg"
-                alt="magnifying glass image on a button" height="30px" width="30px" />
-            </button> -->
         <ul class="top-header-links">
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact</a></li>
 
         </ul>
     </div>
+    <div class="secondary-header">
+        <p class="name">
+            Hi there, <br />
+            Lovely Reader (@reader)
+        </p>
+        <!-- <div class="mushroom">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" width="100%" height="100%" fill=#ad1b0e>
+                <title>mushroom</title>
+                <path
+                    d="M12,2A10,10 0 0,1 22,12A2,2 0 0,1 20,14H4A2,2 0 0,1 2,12A10,10 0 0,1 12,2M12,8A2,2 0 0,0 14,6A2,2 0 0,0 12,4A2,2 0 0,0 10,6A2,2 0 0,0 12,8M17,12A2,2 0 0,0 19,10A2,2 0 0,0 17,8A2,2 0 0,0 15,10A2,2 0 0,0 17,12M7,12A2,2 0 0,0 9,10A2,2 0 0,0 7,8A2,2 0 0,0 5,10A2,2 0 0,0 7,12M15,15L16.27,19.45L16.35,20C16.35,21.1 15.45,22 14.35,22H9.65A2,2 0 0,1 7.65,20L7.73,19.45L9,15H15Z" />
+            </svg>
+        </div> -->
+
+        <div class="button-group">
+            <button class="button" id="add-book">Add New Book</button>
+            <button class="button">Upload</button>
+            <button class="button">Share</button>
+        </div>
+        <dialog class="modal">
+            <button id="close">X</button>
+            <form id="add-book-form" method="dialog">
+                <label for="title">Book Title:</label>
+                <input type="text" id="title" name="title" />
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" />
+                <label for="pages">Number of Pages:</label>
+                <input type="text" id="pages" name="pages" />
+                <label for="have-read">Have Read:</label>
+                <input type="radio" id="have-read" name="have-read" />
+            </form>
+            <button id="submit-button">Submit Book</button>
+        </dialog>
+
+
+    </div>
     <div class="main-body"></div>
     <div class="books">
         <h3>Your Books</h3>
         <h3>Announcements</h3>
-        <div class="book-cards" id="book-cards">
-            <!--<div class="card" id="card">
-                <h3 id="book-title"></h3>
-                <p id="author"></p>
-                <p id="page-number"></p>
-                <p id="have-read"></p>
-            </div>
-             <div class="card" id="card">
-                <h3 id="book-title"></h3>
-                <p id="author"></p>
-                <p id="page-number"></p>
-                <p id="have-read"></p>
-            </div>
-            <div class="card" id="card">
-                <h3 id="book-title"></h3>
-                <p id="author"></p>
-                <p id="page-number"></p>
-                <p id="have-read"></p>
-            </div>
-            <div class="card" id="card">
-                <h3 id="book-title"></h3>
-                <p id="author"></p>
-                <p id="page-number"></p>
-                <p id="have-read"></p>
-            </div>
-            <div class="card" id="card">
-                <h3 id="book-title"></h3>
-                <p id="author"></p>
-                <p id="page-number"></p>
-                <p id="have-read"></p>
-            </div>
-            <div class="card" id="card">
-                <h3 id="book-title"></h3>
-                <p id="author"></p>
-                <p id="page-number"></p>
-                <p id="have-read"></p>
-            </div> -->
-        </div>
+        <div class="book-cards" id="book-cards"></div>
 
         <div class="right-sidebar">
             <div class="announcements">
