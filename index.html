@@ -5,13 +5,105 @@
     <meta charset="UTF-8">
     <title>Welcome to the Library</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="bookObjects.js" defer></script>
+    <link rel="icon" href="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/bookshelf.svg" type="image/svg+xml">
+    <script src="library.js" defer></script>
 
 
 </head>
 
 <body>
-    <h1>Welcome to the Library</h1>
+    <div class="top-header">
+        <div class="top-header-logo">
+            <a href="#"><img class="snail" src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/bookshelf.svg"
+                    alt="snail in profile pointing right" height="90px" width="90px" /></a>
+        </div>
+        <div class="search">
+            <img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/magnify.svg"
+                alt="magnifying glass image on a button" height="30px" width="30px" />
+            <input type="search" class="search-bar" aria-label="Search for a book" name="search-input" size="50" />
+        </div>
+        <!-- <button type="submit" class="search-button">
+            <img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/magnify.svg"
+                alt="magnifying glass image on a button" height="30px" width="30px" />
+            </button> -->
+        <ul class="top-header-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+
+        </ul>
+    </div>
+    <div class="main-body"></div>
+    <div class="books">
+        <h3>Your Books</h3>
+        <h3>Announcements</h3>
+        <div class="book-cards" id="book-cards">
+            <!--<div class="card" id="card">
+                <h3 id="book-title"></h3>
+                <p id="author"></p>
+                <p id="page-number"></p>
+                <p id="have-read"></p>
+            </div>
+             <div class="card" id="card">
+                <h3 id="book-title"></h3>
+                <p id="author"></p>
+                <p id="page-number"></p>
+                <p id="have-read"></p>
+            </div>
+            <div class="card" id="card">
+                <h3 id="book-title"></h3>
+                <p id="author"></p>
+                <p id="page-number"></p>
+                <p id="have-read"></p>
+            </div>
+            <div class="card" id="card">
+                <h3 id="book-title"></h3>
+                <p id="author"></p>
+                <p id="page-number"></p>
+                <p id="have-read"></p>
+            </div>
+            <div class="card" id="card">
+                <h3 id="book-title"></h3>
+                <p id="author"></p>
+                <p id="page-number"></p>
+                <p id="have-read"></p>
+            </div>
+            <div class="card" id="card">
+                <h3 id="book-title"></h3>
+                <p id="author"></p>
+                <p id="page-number"></p>
+                <p id="have-read"></p>
+            </div> -->
+        </div>
+
+        <div class="right-sidebar">
+            <div class="announcements">
+                <div class="card">
+                    <h4>Site Maintenance</h4>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Habitasse placerat natoque; congue
+                        condimentum
+                        felis
+                        taciti feugiat. Parturient phasellus himenaeos egestas suscipit ultricies.</p>
+                </div>
+                <div class="card">
+                    <h4>Community Updates</h4>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Habitasse placerat natoque; congue
+                        condimentum
+                        felis
+                        taciti feugiat. Parturient phasellus himenaeos egestas suscipit ultricies.</p>
+
+                </div>
+                <div class="card">
+                    <h4>Updated Privacy Policy</h4>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Habitasse placerat natoque; congue
+                        condimentum
+                        felis
+                        taciti feugiat. Parturient phasellus himenaeos egestas suscipit ultricies.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
 </body>
 
 </html>
