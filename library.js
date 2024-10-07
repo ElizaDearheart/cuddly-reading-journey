@@ -12,34 +12,37 @@ function Book(title, author, pages, have_read) {
     }
 };
 
+let bookCardContainer = document.getElementById("book-cards");
 let bookDiv = document.createElement("div");
 bookDiv.id = "card";
 // let bookCard = document.getElementById("card");
-let bookCardContainer = document.getElementById("book-cards");
 
 
 //DISPLAY BOOKS
-function displayBooks() {
-    let bookTitle = document.createElement("h3");
-    let bookAuthor = document.createElement("p");
-    let bookPages = document.createElement("p");
-    let haveRead = document.createElement("p");
+// function displayBooks() {
+//     myLibrary.forEach(book => {
 
-    myLibrary.forEach(book => {
-        bookTitle.textContent = book.title;
-        bookAuthor.textContent = book.author;
-        bookPages.textContent = book.pages;
-        haveRead.textContent = book.have_read;
+//         let bookTitle = document.createElement("h3");
+//         let bookAuthor = document.createElement("p");
+//         let bookPages = document.createElement("p");
+//         let haveRead = document.createElement("p");
 
-    })
 
-    let container = document.getElementById("card");
-    container.appendChild(bookTitle);
-    container.appendChild(bookAuthor);
-    container.appendChild(bookPages);
-    container.appendChild(haveRead);
+//         bookTitle.textContent = book.title;
+//         bookAuthor.textContent = book.author;
+//         bookPages.textContent = book.pages;
+//         haveRead.textContent = book.have_read;
 
-};
+//         bookCardContainer.appendChild(bookDiv)
+//         bookDiv.textContent = book;
+
+//         let container = document.getElementById("card");
+//         container.appendChild(bookTitle);
+//         container.appendChild(bookAuthor);
+//         container.appendChild(bookPages);
+//         container.appendChild(haveRead);
+//     })
+// };
 
 
 //BOOK MODAL
@@ -72,15 +75,37 @@ function addBookToLibrary() {
         let have_read = checkedRadio.value;
 
         let book = new Book(title, author, pages, have_read);
-        // let bookDiv = document.createElement("div");
+
         myLibrary.push(book);
-        bookDiv.textContent = book;
 
-        // bookDiv.id = "card";
-        // let container = document.getElementById("book-cards");
 
-        bookCardContainer.appendChild(bookDiv)
-        displayBooks()
+
+        myLibrary.forEach(book => {
+
+            let bookTitle = document.createElement("h3");
+            let bookAuthor = document.createElement("p");
+            let bookPages = document.createElement("p");
+            let haveRead = document.createElement("p");
+
+
+            bookTitle.textContent = book.title;
+            bookAuthor.textContent = book.author;
+            bookPages.textContent = book.pages;
+            haveRead.textContent = book.have_read;
+
+
+            // bookDiv.textContent = book;
+            // let container = document.getElementById("card");
+            bookDiv.appendChild(bookTitle);
+            bookDiv.appendChild(bookAuthor);
+            bookDiv.appendChild(bookPages);
+            bookDiv.appendChild(haveRead);
+
+
+        });
+        bookCardContainer.appendChild(bookDiv);
+
+        //displayBooks()
 
 
         function clearAllInputs() {
