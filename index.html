@@ -56,10 +56,21 @@
                 <input type="text" id="author" name="author" />
                 <label for="pages">Number of Pages:</label>
                 <input type="text" id="pages" name="pages" />
-                <label for="have-read">Have Read:</label>
-                <input type="radio" id="have-read" name="have-read" />
+                <div class="radio">
+                    <lengend>Have you read this book?</lengend>
+                    <fieldset>
+                        <div>
+                            <input type="radio" id="have-read" name="have-read" value="Yep, read it!" />
+                            <label for="have-read">Sure have!</label>
+
+                            <input type="radio" id="have-not-read" name="have-read" value="Not yet" />
+                            <label for="have-not-read">Not yet</label>
+                        </div>
+                    </fieldset>
+                </div>
+                <input type="submit" value="Add Book">
             </form>
-            <button id="submit-button">Submit Book</button>
+
         </dialog>
 
 
@@ -68,7 +79,7 @@
     <div class="books">
         <h3>Your Books</h3>
         <h3>Announcements</h3>
-        <div class="book-cards" id="book-cards"></div>
+        <div id="book-cards"></div>
 
         <div class="right-sidebar">
             <div class="announcements">

@@ -29,6 +29,36 @@ p {
 }
 
 
+.button {
+    padding: 15px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    background-color: var(--slug-green);
+    color: var(--dark-blue);
+    font-size: 1em;
+    width: 150px;
+}
+
+li {
+
+    list-style-type: none;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+input:valid {
+    border: 1px solid lightgray;
+}
+
+input:invalid {
+    border: 1px solid red;
+}
+
+
 /* Top Header */
 .top-header {
     background-color: var(--light-pink);
@@ -125,6 +155,8 @@ p {
 .modal {
     border-radius: 20px;
     padding: 20px;
+    border-width: 10px;
+    border-color: var(--slug-green);
 }
 
 .modal #close {
@@ -140,20 +172,67 @@ p {
 
 .modal #add-book-form {
     display: grid;
-    padding: 20px;
-    gap: 10px;
-    font-size: 1em;
+    padding: 2em;
+    gap: 1em;
+    font-size: 1.5em;
+    width: 15em;
 
 }
 
-.modal #submit-button {
-    width: 100px;
+.modal input[type=text] {
+    height: 48px;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: whitesmoke;
+    padding-left: 10px;
+}
+
+.modal input[type=radio] {
+    appearance: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+
+    border: 4px solid var(--slug-green);
+    transition: 0.1s all linear;
+    margin-right: 5px;
+
+    position: relative;
+    top: 2px;
+}
+
+.radio {
+    /* display: flex;
+    align-items: flex-start; */
+    margin-bottom: 5px;
+}
+
+.radio label {
+    margin-right: 15px;
+    line-height: 32px;
+}
+
+.radio input:checked {
+    border: 6px solid var(--slug-green)
+}
+
+.radio legend {
+    color: whitesmoke;
+    background-color: var(--slug-green);
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.modal input[type=submit] {
+    width: 200px;
+    height: 75px;
     text-align: center;
     border-radius: 20px;
     font-weight: bold;
     background-color: var(--slug-green);
     color: var(--dark-blue);
-    font-size: 1em;
+    font-size: 1.5em;
     justify-self: center;
 }
 
@@ -177,11 +256,11 @@ p {
     gap: 15px;
 }
 
-.book-cards p {
+#book-cards p {
     font-size: 1.25em;
 }
 
-.book-cards #card {
+#book-cards #card {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr, 3fr, 1fr;
@@ -205,7 +284,8 @@ p {
 
 .announcements {
     text-align: left;
-    border-radius: 20px;
+    border-radius: 60px;
+    /*20px*/
     padding: 10px;
     background-color: whitesmoke;
 }
@@ -227,36 +307,4 @@ p {
     background-color: var(--light-pink);
     grid-column: 1/2;
     height: 72px;
-}
-
-
-/* Styling */
-
-.button {
-    padding: 15px 16px;
-    border-radius: 20px;
-    font-weight: bold;
-    background-color: var(--slug-green);
-    color: var(--dark-blue);
-    font-size: 1em;
-    width: 150px;
-}
-
-li {
-
-    list-style-type: none;
-    padding: 10px;
-}
-
-a {
-    text-decoration: none;
-    color: whitesmoke;
-}
-
-input:valid {
-    border: 1px solid lightgray;
-}
-
-input:invalid {
-    border: 1px solid red;
 }

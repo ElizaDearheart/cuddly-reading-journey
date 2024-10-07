@@ -1,4 +1,7 @@
-//constructor for adding books to library
+//LIBRARY
+let myLibrary = [];
+
+//BOOK CONSTRUCTOR
 function Book(title, author, pages, have_read) {
     this.title = title;
     this.author = author;
@@ -9,15 +12,37 @@ function Book(title, author, pages, have_read) {
     }
 };
 
-//books
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');
-const prideAndPrejudice = new Book('Pride and Prejudice', 'Jane Austen', '480 pages', 'read');
-const hamlet = new Book('Hamlet', 'William Shakespeare', '400 pages', 'read');
+let bookDiv = document.createElement("div");
+bookDiv.id = "card";
+// let bookCard = document.getElementById("card");
+let bookCardContainer = document.getElementById("book-cards");
 
-//library
-let myLibrary = [prideAndPrejudice, hamlet];
 
-//add books modal
+//DISPLAY BOOKS
+function displayBooks() {
+    let bookTitle = document.createElement("h3");
+    let bookAuthor = document.createElement("p");
+    let bookPages = document.createElement("p");
+    let haveRead = document.createElement("p");
+
+    myLibrary.forEach(book => {
+        bookTitle.textContent = book.title;
+        bookAuthor.textContent = book.author;
+        bookPages.textContent = book.pages;
+        haveRead.textContent = book.have_read;
+
+    })
+
+    let container = document.getElementById("card");
+    container.appendChild(bookTitle);
+    container.appendChild(bookAuthor);
+    container.appendChild(bookPages);
+    container.appendChild(haveRead);
+
+};
+
+
+//BOOK MODAL
 let dialog = document.querySelector("dialog");
 let addBookButton = document.getElementById("add-book");
 let closeButton = document.getElementById("close");
@@ -32,60 +57,58 @@ closeButton.onclick = function () {
 }
 
 
-//function to loop through books and display on page
-function displayBooks() {
-    let bookTitle = document.createElement("h3");
-    let bookAuthor = document.createElement("p");
-    let bookPages = document.createElement("p");
-    let haveRead = document.createElement("p");
+//ADD BOOKS TO LIBRARY
+function addBookToLibrary() {
 
-    myLibrary.forEach(book => {
-        bookTitle.textContent = book.title;
-        bookAuthor.textContent = book.author;
-        bookPages.textContent = book.pages;
-        haveRead.textContent = book.have_read;
+
+    // modal form submission
+    document.getElementById("add-book-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let title = document.getElementById("title").value;
+        let author = document.getElementById("author").value;
+        let pages = document.getElementById("pages").value;
+        let haveReadGroup = document.getElementsByName("have-read");
+        let checkedRadio = Array.from(haveReadGroup).find((radio) => radio.checked);
+        let have_read = checkedRadio.value;
+
+        let book = new Book(title, author, pages, have_read);
+        // let bookDiv = document.createElement("div");
+        myLibrary.push(book);
+        bookDiv.textContent = book;
+
+        // bookDiv.id = "card";
+        // let container = document.getElementById("book-cards");
+
+        bookCardContainer.appendChild(bookDiv)
+        displayBooks()
+
+
+        function clearAllInputs() {
+            let allInputs = document.querySelectorAll('input[type="text"]');
+            allInputs.forEach(singleInput => singleInput.value = "");
+        }
+
+        let radioButtons = document.querySelectorAll('input[type="radio"]');
+        function resetRadio() {
+            for (const radioButton of radioButtons) {
+                radioButton.checked = false
+            }
+        }
+
+        console.log(myLibrary);
+        clearAllInputs();
+        resetRadio();
+        dialog.style.display = "none";
+
     })
-
-    let container = document.getElementById("card");
-    container.appendChild(bookTitle);
-    container.appendChild(bookAuthor);
-    container.appendChild(bookPages);
-    container.appendChild(haveRead);
-
-};
-
-
-//function to add books to library
-function addBookToLibrary(title, author, pages, have_read) {
-
-    //books
-    let newBook = new Book(title, author, pages, have_read)
-    let newBookDiv = document.createElement("div");
-    myLibrary.push(newBook);
-    newBookDiv.textContent = newBook;
-
-    newBookDiv.id = "card";
-    let container = document.getElementById("book-cards");
-    container.appendChild(newBookDiv)
-
-    displayBooks()
 
 }
 
 
 
-
-//     bookForm.onsubmit = e => {
-//         e.target.reset();
-//     };
-//     console.log(myLibrary)
-// };
-
-// let bookSubmit = document.querySelector(".submit");
-// bookSubmit.addEventListener("click", addBookToLibrary);
+addBookToLibrary()
 
 
-console.log(myLibrary[0])
-console.log(myLibrary[1])
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet')
-console.log(myLibrary[2])
+// const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');
+// const prideAndPrejudice = new Book('Pride and Prejudice', 'Jane Austen', '480 pages', 'read');
+// const hamlet = new Book('Hamlet', 'William Shakespeare', '400 pages', 'read');
