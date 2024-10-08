@@ -12,37 +12,11 @@ function Book(title, author, pages, have_read) {
     }
 };
 
+
 let bookCardContainer = document.getElementById("book-cards");
 let bookDiv = document.createElement("div");
 bookDiv.id = "card";
 // let bookCard = document.getElementById("card");
-
-
-//DISPLAY BOOKS
-// function displayBooks() {
-//     myLibrary.forEach(book => {
-
-//         let bookTitle = document.createElement("h3");
-//         let bookAuthor = document.createElement("p");
-//         let bookPages = document.createElement("p");
-//         let haveRead = document.createElement("p");
-
-
-//         bookTitle.textContent = book.title;
-//         bookAuthor.textContent = book.author;
-//         bookPages.textContent = book.pages;
-//         haveRead.textContent = book.have_read;
-
-//         bookCardContainer.appendChild(bookDiv)
-//         bookDiv.textContent = book;
-
-//         let container = document.getElementById("card");
-//         container.appendChild(bookTitle);
-//         container.appendChild(bookAuthor);
-//         container.appendChild(bookPages);
-//         container.appendChild(haveRead);
-//     })
-// };
 
 
 //BOOK MODAL
@@ -58,7 +32,6 @@ addBookButton.onclick = function () {
 closeButton.onclick = function () {
     dialog.style.display = "none"
 }
-
 
 //ADD BOOKS TO LIBRARY
 function addBookToLibrary() {
