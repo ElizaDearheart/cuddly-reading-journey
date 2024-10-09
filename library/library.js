@@ -1,5 +1,5 @@
 //LIBRARY
-let myLibrary = [];
+const myLibrary = [];
 
 //BOOK CONSTRUCTOR
 function Book(title, author, pages, have_read) {
@@ -12,15 +12,12 @@ function Book(title, author, pages, have_read) {
   };
 }
 
-let bookCardContainer = document.getElementById("book-cards");
-let bookDiv = document.createElement("div");
-bookDiv.id = "card";
 // let bookCard = document.getElementById("card");
 
 //BOOK MODAL
-let dialog = document.querySelector("dialog");
-let addBookButton = document.getElementById("add-book");
-let closeButton = document.getElementById("close");
+const dialog = document.querySelector("dialog");
+const addBookButton = document.getElementById("add-book");
+const closeButton = document.getElementById("close");
 
 //open modal
 addBookButton.onclick = function () {
@@ -32,34 +29,36 @@ closeButton.onclick = function () {
 };
 
 //ADD BOOKS TO LIBRARY
+const bookCardContainer = document.getElementById("book-cards");
 function addBookToLibrary() {
   // modal form submission
   document
     .getElementById("add-book-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
-      let title = document.getElementById("title").value;
-      let author = document.getElementById("author").value;
-      let pages = document.getElementById("pages").value;
-      let haveReadGroup = document.getElementsByName("have-read");
-      let checkedRadio = Array.from(haveReadGroup).find(
+      const title = document.getElementById("title").value;
+      const author = document.getElementById("author").value;
+      const pages = document.getElementById("pages").value;
+      const haveReadGroup = document.getElementsByName("have-read");
+      const checkedRadio = Array.from(haveReadGroup).find(
         (radio) => radio.checked,
       );
-      let have_read = checkedRadio.value;
+      const have_read = checkedRadio.value;
 
-      let book = new Book(title, author, pages, have_read);
+      const book = new Book(title, author, pages, have_read);
 
       myLibrary.push(book);
 
-      myLibrary.forEach((book) => {
-        let bookTitle = document.createElement("h3");
-        let bookAuthor = document.createElement("p");
-        let bookPages = document.createElement("p");
-        let haveRead = document.createElement("p");
-
+      function addBookCard() {
+        const bookDiv = document.createElement("div");
+        bookDiv.id = "card";
+        const bookTitle = document.createElement("h3");
         bookTitle.textContent = book.title;
+        const bookAuthor = document.createElement("p");
         bookAuthor.textContent = book.author;
+        const bookPages = document.createElement("p");
         bookPages.textContent = book.pages;
+        const haveRead = document.createElement("p");
         haveRead.textContent = book.have_read;
 
         // bookDiv.textContent = book;
@@ -68,17 +67,17 @@ function addBookToLibrary() {
         bookDiv.appendChild(bookAuthor);
         bookDiv.appendChild(bookPages);
         bookDiv.appendChild(haveRead);
-      });
-      bookCardContainer.appendChild(bookDiv);
+        bookCardContainer.appendChild(bookDiv);
+      }
 
-      //displayBooks()
+      addBookCard();
 
       function clearAllInputs() {
-        let allInputs = document.querySelectorAll('input[type="text"]');
+        const allInputs = document.querySelectorAll('input[type="text"]');
         allInputs.forEach((singleInput) => (singleInput.value = ""));
       }
 
-      let radioButtons = document.querySelectorAll('input[type="radio"]');
+      const radioButtons = document.querySelectorAll('input[type="radio"]');
       function resetRadio() {
         for (const radioButton of radioButtons) {
           radioButton.checked = false;
