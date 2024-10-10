@@ -70,7 +70,7 @@
           <label for="author">Author:</label>
           <input type="text" id="author" name="author" />
           <label for="pages">Number of Pages:</label>
-          <input type="text" id="pages" name="pages" />
+          <input type="number" id="pages" name="pages" />
           <div class="radio">
             <lengend>Have you read this book?</lengend>
             <fieldset>
@@ -97,12 +97,13 @@
         </form>
       </dialog>
     </div>
-    <div class="main-body"></div>
+    <!-- <div class="main-body"></div> -->
     <div class="books">
       <h3>Your Books</h3>
       <h3>Announcements</h3>
-      <div id="book-cards"></div>
-
+      <div class="card-parent" id="card-parent">
+        <div class="book-cards" id="book-cards"></div>
+      </div>
       <div class="right-sidebar">
         <div class="announcements">
           <div class="card">

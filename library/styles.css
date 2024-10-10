@@ -183,6 +183,15 @@ input:invalid {
   padding-left: 10px;
 }
 
+.modal input[type="number"] {
+  height: 48px;
+  border-radius: 30px;
+  font-size: 1.5rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  background-color: whitesmoke;
+  padding-left: 10px;
+}
+
 .modal input[type="radio"] {
   appearance: none;
   border-radius: 50%;
@@ -198,8 +207,6 @@ input:invalid {
 }
 
 .radio {
-  /* display: flex;
-    align-items: flex-start; */
   margin-bottom: 5px;
 }
 
@@ -231,13 +238,17 @@ input:invalid {
   justify-self: center;
 }
 
-/*Main Body*/
+/*Card Parent*/
+.card-parent h1 {
+  color: var(--dark-blue);
+  text-align: center;
+  font-size: 2.5em;
+}
 
-/* Articles*/
+/* Books */
 .books {
-  /* grid-column: 1/2; */
   display: grid;
-  grid-template-columns: 2fr, 1fr;
+  grid-template-columns: 4fr 1fr;
   background-color: var(--light-blue);
   gap: 15px;
   padding: 10px;
@@ -246,18 +257,16 @@ input:invalid {
 .book-cards {
   grid-column: 1/2;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 15px;
 }
 
-#book-cards p {
+.book-cards p {
   font-size: 1.25em;
 }
 
-#book-cards #card {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr, 3fr, 1fr;
+.book-cards #card {
   height: 300px;
   text-align: left;
   border-radius: 20px;

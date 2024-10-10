@@ -12,7 +12,18 @@ function Book(title, author, pages, have_read) {
   };
 }
 
-// let bookCard = document.getElementById("card");
+// CHECK FOR EMPTY LIBRARY
+const emptyLibraryContainer = document.getElementById("card-parent");
+const emptyLibraryMessage = document.createElement("h1");
+// TODO: Find new font //
+
+function emptyLibrary() {
+  if (myLibrary.length == 0) {
+    emptyLibraryMessage.textContent =
+      "Looks like your library is empty.  Add books to get started!";
+    emptyLibraryContainer.appendChild(emptyLibraryMessage);
+  }
+}
 
 //BOOK MODAL
 const dialog = document.querySelector("dialog");
@@ -28,12 +39,27 @@ closeButton.onclick = function () {
   dialog.style.display = "none";
 };
 
+//clear modal functions
+function clearAllInputs() {
+  const allInputs = document.querySelectorAll('input[type="text"]');
+  allInputs.forEach((singleInput) => (singleInput.value = ""));
+}
+
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+function resetRadio() {
+  for (const radioButton of radioButtons) {
+    radioButton.checked = false;
+  }
+}
+
 //ADD BOOKS TO LIBRARY
 const bookCardContainer = document.getElementById("book-cards");
+
 function addBookToLibrary() {
   // modal form submission
   document
     .getElementById("add-book-form")
+    //TODO Update form to have form controls:  number for pages, etc)
     .addEventListener("submit", function (event) {
       event.preventDefault();
       const title = document.getElementById("title").value;
@@ -44,12 +70,12 @@ function addBookToLibrary() {
         (radio) => radio.checked,
       );
       const have_read = checkedRadio.value;
-
+      // add new book to library
       const book = new Book(title, author, pages, have_read);
-
       myLibrary.push(book);
-
+      // add card to page
       function addBookCard() {
+        //book info
         const bookDiv = document.createElement("div");
         bookDiv.id = "card";
         const bookTitle = document.createElement("h3");
@@ -60,37 +86,36 @@ function addBookToLibrary() {
         bookPages.textContent = book.pages;
         const haveRead = document.createElement("p");
         haveRead.textContent = book.have_read;
+        //delete button
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "X";
+        deleteButton.id = "delete-button";
+        deleteButton.addEventListener("click", () => {
+          bookDiv.remove();
+          const index = myLibrary.indexOf(book);
+          if (index > -1) {
+            myLibrary.splice(index, 1);
+          }
 
-        // bookDiv.textContent = book;
-        // let container = document.getElementById("card");
+          console.log(myLibrary);
+        });
+
         bookDiv.appendChild(bookTitle);
         bookDiv.appendChild(bookAuthor);
         bookDiv.appendChild(bookPages);
         bookDiv.appendChild(haveRead);
+        bookDiv.appendChild(deleteButton);
         bookCardContainer.appendChild(bookDiv);
       }
 
       addBookCard();
-
-      function clearAllInputs() {
-        const allInputs = document.querySelectorAll('input[type="text"]');
-        allInputs.forEach((singleInput) => (singleInput.value = ""));
-      }
-
-      const radioButtons = document.querySelectorAll('input[type="radio"]');
-      function resetRadio() {
-        for (const radioButton of radioButtons) {
-          radioButton.checked = false;
-        }
-      }
-
-      console.log(myLibrary);
       clearAllInputs();
       resetRadio();
       dialog.style.display = "none";
     });
 }
 
+emptyLibrary();
 addBookToLibrary();
 
 // const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');
