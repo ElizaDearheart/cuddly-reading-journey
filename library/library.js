@@ -16,7 +16,6 @@ function Book(title, author, pages, have_read) {
 // CHECK FOR EMPTY LIBRARY
 const emptyLibraryContainer = document.getElementById("card-parent");
 const emptyLibraryMessage = document.createElement("h1");
-emptyLibraryMessage.id = "empty-message";
 // TODO: Find new font //
 function emptyLibrary() {
   if (bookCardContainer.children.length == 0) {
