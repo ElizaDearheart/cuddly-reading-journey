@@ -1,5 +1,6 @@
 //LIBRARY
 const myLibrary = [];
+const bookCardContainer = document.getElementById("book-cards");
 
 //BOOK CONSTRUCTOR
 function Book(title, author, pages, have_read) {
@@ -15,14 +16,18 @@ function Book(title, author, pages, have_read) {
 // CHECK FOR EMPTY LIBRARY
 const emptyLibraryContainer = document.getElementById("card-parent");
 const emptyLibraryMessage = document.createElement("h1");
+emptyLibraryMessage.id = "empty-message";
 // TODO: Find new font //
-
 function emptyLibrary() {
-  if (myLibrary.length == 0) {
+  if (bookCardContainer.children.length == 0) {
     emptyLibraryMessage.textContent =
       "Looks like your library is empty.  Add books to get started!";
     emptyLibraryContainer.appendChild(emptyLibraryMessage);
   }
+  if (bookCardContainer.children.length >= 1) {
+    emptyLibraryMessage.remove();
+  }
+  console.log(bookCardContainer.children.length);
 }
 
 //BOOK MODAL
@@ -41,8 +46,10 @@ closeButton.onclick = function () {
 
 //clear modal functions
 function clearAllInputs() {
-  const allInputs = document.querySelectorAll('input[type="text"]');
-  allInputs.forEach((singleInput) => (singleInput.value = ""));
+  const textInputs = document.querySelectorAll('input[type="text"]');
+  const numberInputs = document.querySelectorAll('input[type="number"]');
+  textInputs.forEach((singleInput) => (singleInput.value = ""));
+  numberInputs.forEach((singleInput) => (singleInput.value = ""));
 }
 
 const radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -53,13 +60,12 @@ function resetRadio() {
 }
 
 //ADD BOOKS TO LIBRARY
-const bookCardContainer = document.getElementById("book-cards");
 
 function addBookToLibrary() {
+  emptyLibrary();
   // modal form submission
   document
     .getElementById("add-book-form")
-    //TODO Update form to have form controls:  number for pages, etc)
     .addEventListener("submit", function (event) {
       event.preventDefault();
       const title = document.getElementById("title").value;
@@ -86,17 +92,24 @@ function addBookToLibrary() {
         bookPages.textContent = book.pages;
         const haveRead = document.createElement("p");
         haveRead.textContent = book.have_read;
+        //BUTTON GROUP
+        // TODO: Add share button //
         //delete button
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "X";
-        deleteButton.id = "delete-button";
-        deleteButton.addEventListener("click", () => {
+        const cardButtonDiv = document.createElement("div");
+        cardButtonDiv.id = "card-button-group";
+        const deleteBookButton = document.createElement("button");
+        deleteBookButton.innerHTML =
+          '<img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/images/delete-outline.svg"/>';
+        deleteBookButton.id = "delete-button";
+        cardButtonDiv.appendChild(deleteBookButton);
+        //delete book card function
+        deleteBookButton.addEventListener("click", () => {
           bookDiv.remove();
           const index = myLibrary.indexOf(book);
           if (index > -1) {
             myLibrary.splice(index, 1);
           }
-
+          emptyLibrary();
           console.log(myLibrary);
         });
 
@@ -104,18 +117,19 @@ function addBookToLibrary() {
         bookDiv.appendChild(bookAuthor);
         bookDiv.appendChild(bookPages);
         bookDiv.appendChild(haveRead);
-        bookDiv.appendChild(deleteButton);
+        bookDiv.appendChild(cardButtonDiv);
         bookCardContainer.appendChild(bookDiv);
       }
 
       addBookCard();
+      emptyLibrary();
       clearAllInputs();
       resetRadio();
       dialog.style.display = "none";
+      console.log(myLibrary);
     });
 }
 
-emptyLibrary();
 addBookToLibrary();
 
 // const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');

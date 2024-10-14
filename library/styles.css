@@ -28,7 +28,7 @@ p {
   color: var(--dark-blue);
 }
 
-.button {
+.sh-button {
   padding: 15px 16px;
   border-radius: 20px;
   font-weight: bold;
@@ -117,7 +117,7 @@ input:invalid {
   border-style: solid;
 }
 
-.button-group {
+.sh-button-group {
   display: flex;
   flex-direction: row;
   grid-column: 3/4;
@@ -267,6 +267,8 @@ input:invalid {
 }
 
 .book-cards #card {
+  display: flex;
+  flex-direction: column;
   height: 300px;
   text-align: left;
   border-radius: 20px;
@@ -275,6 +277,21 @@ input:invalid {
   border-left-width: 10px;
   border-left-color: var(--slug-green);
   border-left-style: solid;
+}
+
+#card-button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+#delete-button {
+  background-color: whitesmoke;
+  border: none;
+}
+
+#delete-button img {
+  width: 30px;
 }
 
 /* Right Sidebar */
