@@ -148,14 +148,14 @@ input:invalid {
 
 /* Add Book Modal */
 
-.modal {
+.add-book-modal {
   border-radius: 20px;
   padding: 20px;
   border-width: 10px;
   border-color: var(--slug-green);
 }
 
-.modal #close {
+.add-book-modal #close-book-modal {
   width: 30px;
   text-align: center;
   border-radius: 20px;
@@ -166,7 +166,7 @@ input:invalid {
   justify-self: right;
 }
 
-.modal #add-book-form {
+.add-book-modal #add-book-form {
   display: grid;
   padding: 2em;
   gap: 1em;
@@ -174,7 +174,7 @@ input:invalid {
   width: 15em;
 }
 
-.modal input[type="text"] {
+.add-book-modal input[type="text"] {
   height: 48px;
   border-radius: 30px;
   font-size: 1.5rem;
@@ -183,7 +183,7 @@ input:invalid {
   padding-left: 10px;
 }
 
-.modal input[type="number"] {
+.add-book-modal input[type="number"] {
   height: 48px;
   border-radius: 30px;
   font-size: 1.5rem;
@@ -192,7 +192,7 @@ input:invalid {
   padding-left: 10px;
 }
 
-.modal input[type="radio"] {
+.add-book-modal input[type="radio"] {
   appearance: none;
   border-radius: 50%;
   width: 16px;
@@ -226,7 +226,7 @@ input:invalid {
   font-size: 14px;
 }
 
-.modal input[type="submit"] {
+.add-book-modal input[type="submit"] {
   width: 200px;
   height: 75px;
   text-align: center;
