@@ -74,28 +74,24 @@
           <input type="text" id="author" name="author" />
           <label for="pages">Number of Pages:</label>
           <input type="number" id="pages" name="pages" />
-          <div class="radio">
-            <lengend>Have you read this book?</lengend>
-            <fieldset>
-              <div>
-                <input
-                  type="radio"
-                  id="have-read"
-                  name="have-read"
-                  value="Yep, read it!"
-                />
-                <label for="have-read">Sure have!</label>
-
-                <input
-                  type="radio"
-                  id="have-not-read"
-                  name="have-read"
-                  value="Not yet"
-                />
-                <label for="have-not-read">Not yet</label>
-              </div>
-            </fieldset>
+          <div class="read-button-group" id="read-button-group">
+            <label for="have-read">Have you read this book?</label>
+            <br />
+            <input
+              type="button"
+              value="Mark Read"
+              id="have-read"
+              name="have-read"
+            />
+            <input
+              type="button"
+              value="Mark Unread"
+              id="have-not-read"
+              name="have-not-read"
+            />
+            <p>Read status: <span id="result"></span></p>
           </div>
+
           <input type="submit" value="Add Book" />
         </form>
       </dialog>
@@ -107,35 +103,6 @@
       <div class="card-parent" id="card-parent">
         <div class="book-cards" id="book-cards"></div>
       </div>
-      <dialog id="update-read-status-modal" class="update-read-status-modal">
-        <button id="close-read-modal">X</button>
-        <form id="update-read-status" method="dialog">
-          <div class="radio">
-            <lengend>Did you read this book?</lengend>
-            <fieldset>
-              <div>
-                <input
-                  type="radio"
-                  id="have-read"
-                  name="update-have-read"
-                  value="Yep, read it!"
-                />
-                <label for="have-read">Sure have!</label>
-
-                <input
-                  type="radio"
-                  id="have-not-read"
-                  name="update-have-read"
-                  value="Not yet"
-                />
-                <label for="have-not-read">Not yet</label>
-              </div>
-            </fieldset>
-          </div>
-          <button type="button" id="submit-update">Update Read Status</button>
-          <!-- <input type="submit" value="Update Read Status" /> -->
-        </form>
-      </dialog>
       <div class="right-sidebar">
         <div class="announcements">
           <div class="card">

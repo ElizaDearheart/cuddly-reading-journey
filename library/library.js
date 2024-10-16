@@ -1,5 +1,6 @@
 //LIBRARY
 const myLibrary = [];
+let have_read;
 const bookCardContainer = document.getElementById("book-cards");
 
 //BOOK CONSTRUCTOR
@@ -7,11 +8,15 @@ function Book(title, author, pages, have_read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.have_read = have_read;
+  this.have_read = Boolean(have_read);
   this.info = function () {
     return `${this.title}, ${this.author}, ${this.pages}, ${this.have_read}`;
   };
 }
+
+Book.prototype.haveReadToggle = function () {
+  this.have_read = !this.have_read;
+};
 
 // CHECK FOR EMPTY LIBRARY
 const emptyLibraryContainer = document.getElementById("card-parent");
@@ -28,14 +33,31 @@ function emptyLibrary() {
   }
 }
 
+//HAVE_READ
+function selectHaveRead() {
+  document.getElementById("have-read").addEventListener("click", function () {
+    have_read = true;
+    document.getElementById("result").textContent = have_read;
+  });
+  document
+    .getElementById("have-not-read")
+    .addEventListener("click", function () {
+      have_read = false;
+      document.getElementById("result").textContent = have_read;
+    });
+  console.log(have_read);
+}
+
 //BOOK MODAL
 const addBookModal = document.getElementById("add-book-modal");
 const addBookButton = document.getElementById("add-book");
 const closeButton = document.getElementById("close-book-modal");
 
 //open modal
+// selectHaveRead() must be called here, when modal is initialized
 addBookButton.onclick = function () {
   addBookModal.style.display = "grid";
+  selectHaveRead();
 };
 //close modal button
 closeButton.onclick = function () {
@@ -50,17 +72,11 @@ function clearAllInputs() {
   numberInputs.forEach((singleInput) => (singleInput.value = ""));
 }
 
-const radioButtons = document.querySelectorAll('input[type="radio"]');
-function resetRadio() {
-  for (const radioButton of radioButtons) {
-    radioButton.checked = false;
-  }
-}
-
 //ADD BOOKS TO LIBRARY
 
 function addBookToLibrary() {
   emptyLibrary();
+
   // modal form submission
   document
     .getElementById("add-book-form")
@@ -69,14 +85,12 @@ function addBookToLibrary() {
       const title = document.getElementById("title").value;
       const author = document.getElementById("author").value;
       const pages = document.getElementById("pages").value;
-      const haveReadGroup = document.getElementsByName("have-read");
-      const checkedRadio = Array.from(haveReadGroup).find(
-        (radio) => radio.checked,
-      );
-      let have_read = checkedRadio.value;
+
       // add new book to library
-      const book = new Book(title, author, pages, have_read);
+      let book = new Book(title, author, pages, have_read);
       myLibrary.push(book);
+      const index = myLibrary.indexOf(book);
+
       console.log(book.have_read);
       // add card to page
       function addBookCard() {
@@ -89,52 +103,25 @@ function addBookToLibrary() {
         bookAuthor.textContent = "Author: " + book.author;
         const bookPages = document.createElement("p");
         bookPages.textContent = "Number of Pages: " + book.pages;
-        const haveRead = document.createElement("p");
-        haveRead.textContent = "Read status: " + book.have_read;
+        const readState = document.createElement("button");
+        readState.id = "read-state";
+        if (book.have_read == true) {
+          readState.textContent = "Yep!";
+        }
+        if (book.have_read == false) {
+          readState.textContent = "Not yet";
+        }
+
         //BUTTON GROUP
-        // TODO: Add share button //
+
         const cardButtonDiv = document.createElement("div");
         cardButtonDiv.id = "card-button-group";
 
-        //update read status button
-        const updateReadStatusButton = document.createElement("button");
+        //share button
+        const shareButton = document.createElement("button");
         //TODO: add image for button
-        updateReadStatusButton.id = "read-status-button";
-        cardButtonDiv.appendChild(updateReadStatusButton);
-        // modal consts
-        const readStatusModal = document.getElementById(
-          "update-read-status-modal",
-        );
-        const closeReadSelectionModal =
-          document.getElementById("close-read-modal");
-        // close modal button
-        closeReadSelectionModal.onclick = function () {
-          readStatusModal.style.display = "none";
-        };
-
-        //update read status function
-        updateReadStatusButton.addEventListener("click", () => {
-          readStatusModal.style.display = "grid";
-
-          document
-            .getElementById("submit-update")
-            .addEventListener("click", function () {
-              haveReadGroup.forEach((radio) => {
-                let bookToUpdate = myLibrary.indexOf(book);
-                myLibrary[bookToUpdate].have_read = radio.value;
-                haveRead.textContent = "Read status: " + book.newReadStatus;
-              });
-
-              console.log(book.have_read);
-              console.log(myLibrary);
-              //bookDiv.replaceChild(newHaveReadDiv, haveRead);
-              //bookDiv.removeChild(haveRead);
-              //bookDiv.appendChild(newHaveReadDiv);
-              resetRadio();
-              readStatusModal.style.display = "none";
-            });
-          //TO DO: document.getElementById("update-read-status").submit()
-        });
+        shareButton.id = "share-button";
+        cardButtonDiv.appendChild(shareButton);
 
         //delete button
         const deleteBookButton = document.createElement("button");
@@ -145,7 +132,6 @@ function addBookToLibrary() {
         //delete book card function
         deleteBookButton.addEventListener("click", () => {
           bookDiv.remove();
-          const index = myLibrary.indexOf(book);
           if (index > -1) {
             myLibrary.splice(index, 1);
           }
@@ -156,7 +142,7 @@ function addBookToLibrary() {
         bookDiv.appendChild(bookTitle);
         bookDiv.appendChild(bookAuthor);
         bookDiv.appendChild(bookPages);
-        bookDiv.appendChild(haveRead);
+        bookDiv.appendChild(readState);
         bookDiv.appendChild(cardButtonDiv);
         bookCardContainer.appendChild(bookDiv);
       }
@@ -164,7 +150,7 @@ function addBookToLibrary() {
       addBookCard();
       emptyLibrary();
       clearAllInputs();
-      resetRadio();
+      // resetRadio();
       addBookModal.style.display = "none";
       console.log(myLibrary);
     });
