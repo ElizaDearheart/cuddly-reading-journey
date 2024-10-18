@@ -1,6 +1,7 @@
 //LIBRARY
 const myLibrary = [];
-let have_read;
+
+let book;
 const bookCardContainer = document.getElementById("book-cards");
 
 //BOOK CONSTRUCTOR
@@ -14,7 +15,7 @@ function Book(title, author, pages, have_read) {
   };
 }
 
-Book.prototype.haveReadToggle = function () {
+Book.prototype.click = function () {
   this.have_read = !this.have_read;
 };
 
@@ -34,6 +35,7 @@ function emptyLibrary() {
 }
 
 //HAVE_READ
+let have_read;
 function selectHaveRead() {
   document.getElementById("have-read").addEventListener("click", function () {
     have_read = true;
@@ -85,37 +87,57 @@ function addBookToLibrary() {
       const title = document.getElementById("title").value;
       const author = document.getElementById("author").value;
       const pages = document.getElementById("pages").value;
-
       // add new book to library
-      let book = new Book(title, author, pages, have_read);
+      book = new Book(title, author, pages, have_read);
       myLibrary.push(book);
       const index = myLibrary.indexOf(book);
 
       console.log(book.have_read);
+
       // add card to page
-      function addBookCard() {
-        //book info
+      function createBookCard() {
         const bookDiv = document.createElement("div");
         bookDiv.id = "card";
+        bookDiv.dataset.id = Math.random().toString(36).substring(5, 22);
         const bookTitle = document.createElement("h3");
         bookTitle.textContent = "Title: " + book.title;
         const bookAuthor = document.createElement("p");
         bookAuthor.textContent = "Author: " + book.author;
         const bookPages = document.createElement("p");
         bookPages.textContent = "Number of Pages: " + book.pages;
-        const readState = document.createElement("button");
-        readState.id = "read-state";
+        const readStatus = document.createElement("p");
+        readStatus.id = "read-status";
+        readStatus.className = "read-status";
+
         if (book.have_read == true) {
-          readState.textContent = "Yep!";
+          readStatus.textContent = "Read it!";
         }
         if (book.have_read == false) {
-          readState.textContent = "Not yet";
+          readStatus.textContent = "The anticipation is real.";
         }
 
         //BUTTON GROUP
 
         const cardButtonDiv = document.createElement("div");
         cardButtonDiv.id = "card-button-group";
+        //update read status
+        const readStatusButton = document.createElement("button");
+        readStatusButton.textContent = "RS";
+        //TODO: Add image
+        readStatusButton.id = "read-status";
+        cardButtonDiv.appendChild(readStatusButton);
+
+        readStatusButton.addEventListener("click", () => {
+          book.click();
+          document.getElementById("read-status");
+          if (book.have_read == true) {
+            readStatus.textContent = "Read it!";
+          }
+          if (book.have_read == false) {
+            readStatus.textContent = "The anticipation is real.";
+          }
+          console.log(myLibrary);
+        });
 
         //share button
         const shareButton = document.createElement("button");
@@ -142,15 +164,14 @@ function addBookToLibrary() {
         bookDiv.appendChild(bookTitle);
         bookDiv.appendChild(bookAuthor);
         bookDiv.appendChild(bookPages);
-        bookDiv.appendChild(readState);
+        bookDiv.appendChild(readStatus);
         bookDiv.appendChild(cardButtonDiv);
         bookCardContainer.appendChild(bookDiv);
       }
 
-      addBookCard();
+      createBookCard();
       emptyLibrary();
       clearAllInputs();
-      // resetRadio();
       addBookModal.style.display = "none";
       console.log(myLibrary);
     });
