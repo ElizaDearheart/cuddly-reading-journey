@@ -1,6 +1,7 @@
 :root {
   --dark-blue: #1f2937;
-  --light-pink: #f774ba;
+  --pink: #f774ba;
+  --light-pink: #fcc0ee;
   --light-blue: #b6e4f2;
   --slug-green: #7bb11d6a;
   /* whitesmoke color code: #F5F5F5 */
@@ -58,7 +59,7 @@ input:invalid {
 
 /* Top Header */
 .top-header {
-  background-color: var(--light-pink);
+  background-color: var(--pink);
   color: whitesmoke;
   display: flex;
   /* height: 90px; */
@@ -192,38 +193,21 @@ input:invalid {
   padding-left: 10px;
 }
 
-.add-book-modal input[type="radio"] {
-  appearance: none;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
+/* .add-book-modal label[type="button"] {
+  padding: 50px;
+} */
 
-  border: 4px solid var(--slug-green);
-  transition: 0.1s all linear;
-  margin-right: 5px;
-
-  position: relative;
-  top: 2px;
-}
-
-.radio {
-  margin-bottom: 5px;
-}
-
-.radio label {
-  margin-right: 15px;
-  line-height: 32px;
-}
-
-.radio input:checked {
-  border: 6px solid var(--slug-green);
-}
-
-.radio legend {
+.add-book-modal input[type="button"] {
+  width: 100px;
+  height: 50px;
+  font-family: "Great Vibes";
+  text-align: center;
+  border-radius: 20px;
+  font-weight: bold;
+  background-color: var(--dark-blue);
   color: whitesmoke;
-  background-color: var(--slug-green);
-  padding: 5px 10px;
-  font-size: 14px;
+  font-size: 1em;
+  justify-self: center;
 }
 
 .add-book-modal input[type="submit"] {
@@ -270,9 +254,9 @@ input:invalid {
 }
 
 .book-cards #card {
-  display: flex;
-  flex-direction: column;
-  height: 300px;
+  display: grid;
+  grid-auto-flow: row;
+  height: auto;
   text-align: left;
   border-radius: 20px;
   padding: 30px;
@@ -282,10 +266,36 @@ input:invalid {
   border-left-style: solid;
 }
 
+.book-cards #card h3 {
+  font-family: "Great Vibes";
+  /* font-weight: 400; */
+  font-weight: bold;
+  font-size: 2em;
+}
+
 #card-button-group {
   display: flex;
   flex-direction: row;
   justify-content: right;
+  align-content: flex-end;
+}
+
+#read-status {
+  background-color: whitesmoke;
+  border: none;
+}
+
+#read-status img {
+  width: 30px;
+}
+
+#share-button {
+  background-color: whitesmoke;
+  border: none;
+}
+
+#share-button img {
+  width: 25px;
 }
 
 #delete-button {
@@ -327,7 +337,7 @@ input:invalid {
 /* Footer */
 
 .footer {
-  background-color: var(--light-pink);
+  background-color: var(--pink);
   grid-column: 1/2;
   height: 72px;
 }

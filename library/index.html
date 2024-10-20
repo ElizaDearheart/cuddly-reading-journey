@@ -69,27 +69,22 @@
         <button id="close-book-modal">X</button>
         <form id="add-book-form" method="dialog">
           <label for="title">Book Title:</label>
-          <input type="text" id="title" name="title" />
+          <input type="text" id="title" name="title" required />
           <label for="author">Author:</label>
-          <input type="text" id="author" name="author" />
+          <input type="text" id="author" name="author" required />
           <label for="pages">Number of Pages:</label>
           <input type="number" id="pages" name="pages" />
           <div class="read-button-group" id="read-button-group">
             <label for="have-read">Have you read this book?</label>
             <br />
+            <input type="button" value="Yes!" id="have-read" name="have-read" />
             <input
               type="button"
-              value="Mark Read"
-              id="have-read"
-              name="have-read"
-            />
-            <input
-              type="button"
-              value="Mark Unread"
+              value="Not yet"
               id="have-not-read"
               name="have-not-read"
             />
-            <p>Read status: <span id="result"></span></p>
+            <!-- <p>Read status: <span id="read-status-result"></span></p> -->
           </div>
 
           <input type="submit" value="Add Book" />

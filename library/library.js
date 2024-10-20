@@ -39,14 +39,22 @@ let have_read;
 function selectHaveRead() {
   document.getElementById("have-read").addEventListener("click", function () {
     have_read = true;
-    document.getElementById("result").textContent = have_read;
+    document.getElementById("have-read").style.backgroundColor = "#fcc0ee"; //light-pink
+    document.getElementById("have-read").style.color = "#1f2937"; //dark blue
+    document.getElementById("have-not-read").style.backgroundColor = "#1f2937"; //dark blue
+    document.getElementById("have-not-read").style.color = "#F5F5F5"; //whitesmoke
   });
   document
     .getElementById("have-not-read")
     .addEventListener("click", function () {
       have_read = false;
-      document.getElementById("result").textContent = have_read;
+      document.getElementById("have-not-read").style.backgroundColor =
+        "#fcc0ee"; //light-pink
+      document.getElementById("have-not-read").style.color = "#1f2937"; //dark blue
+      document.getElementById("have-read").style.backgroundColor = "#1f2937"; //dark blue
+      document.getElementById("have-read").style.color = "#F5F5F5"; //whitesmoke
     });
+
   console.log(have_read);
 }
 
@@ -70,6 +78,10 @@ closeButton.onclick = function () {
 function clearAllInputs() {
   const textInputs = document.querySelectorAll('input[type="text"]');
   const numberInputs = document.querySelectorAll('input[type="number"]');
+  document.getElementById("have-read").style.backgroundColor = "#1f2937"; //dark blue
+  document.getElementById("have-read").style.color = "#F5F5F5"; //whitesmoke
+  document.getElementById("have-not-read").style.backgroundColor = "#1f2937"; //dark blue
+  document.getElementById("have-not-read").style.color = "#F5F5F5"; //whitesmoke
   textInputs.forEach((singleInput) => (singleInput.value = ""));
   numberInputs.forEach((singleInput) => (singleInput.value = ""));
 }
@@ -87,6 +99,7 @@ function addBookToLibrary() {
       const title = document.getElementById("title").value;
       const author = document.getElementById("author").value;
       const pages = document.getElementById("pages").value;
+
       // add new book to library
       book = new Book(title, author, pages, have_read);
       myLibrary.push(book);
@@ -99,12 +112,16 @@ function addBookToLibrary() {
         const bookDiv = document.createElement("div");
         bookDiv.id = "card";
         bookDiv.dataset.id = Math.random().toString(36).substring(5, 22);
+        //book title div
         const bookTitle = document.createElement("h3");
-        bookTitle.textContent = "Title: " + book.title;
+        bookTitle.textContent = book.title;
+        //book author div
         const bookAuthor = document.createElement("p");
-        bookAuthor.textContent = "Author: " + book.author;
+        bookAuthor.textContent = book.author;
+        //book page div
         const bookPages = document.createElement("p");
-        bookPages.textContent = "Number of Pages: " + book.pages;
+        bookPages.textContent = book.pages + " pages";
+        //read status div
         const readStatus = document.createElement("p");
         readStatus.id = "read-status";
         readStatus.className = "read-status";
@@ -120,10 +137,13 @@ function addBookToLibrary() {
 
         const cardButtonDiv = document.createElement("div");
         cardButtonDiv.id = "card-button-group";
+
         //update read status
         const readStatusButton = document.createElement("button");
-        readStatusButton.textContent = "RS";
-        //TODO: Add image
+        readStatusButton.innerHTML =
+          '<img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/images/book.svg"/>';
+        readStatusButton.setAttribute("area-label", "Change read status.");
+        readStatusButton.title = "Change read status.";
         readStatusButton.id = "read-status";
         cardButtonDiv.appendChild(readStatusButton);
 
@@ -141,7 +161,9 @@ function addBookToLibrary() {
 
         //share button
         const shareButton = document.createElement("button");
-        //TODO: add image for button
+        shareButton.innerHTML =
+          '<img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/images/share.svg"/>';
+        shareButton.setAttribute("aria-label", "Share book card.");
         shareButton.id = "share-button";
         cardButtonDiv.appendChild(shareButton);
 
@@ -149,6 +171,7 @@ function addBookToLibrary() {
         const deleteBookButton = document.createElement("button");
         deleteBookButton.innerHTML =
           '<img src="/Users/jordan/Odin_JS/repos/cuddly-reading-journey/images/delete-outline.svg"/>';
+        deleteBookButton.setAttribute("aria-label", "Delete book card.");
         deleteBookButton.id = "delete-button";
         cardButtonDiv.appendChild(deleteBookButton);
         //delete book card function
@@ -161,6 +184,7 @@ function addBookToLibrary() {
           console.log(myLibrary);
         });
 
+        //append elements
         bookDiv.appendChild(bookTitle);
         bookDiv.appendChild(bookAuthor);
         bookDiv.appendChild(bookPages);
