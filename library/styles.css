@@ -13,7 +13,6 @@ body {
   width: 100%;
   height: auto;
   display: grid;
-  /* grid-template-columns: 6fr 1fr; */
   grid-template-rows: 1fr, 1fr, 4fr, 1fr;
 }
 
@@ -62,10 +61,8 @@ input:invalid {
   background-color: var(--pink);
   color: whitesmoke;
   display: flex;
-  /* height: 90px; */
   flex-direction: row;
   grid-row: 1/2;
-  /* grid-column: 1/3; */
 }
 
 .top-header-logo {
@@ -193,10 +190,6 @@ input:invalid {
   padding-left: 10px;
 }
 
-/* .add-book-modal label[type="button"] {
-  padding: 50px;
-} */
-
 .add-book-modal input[type="button"] {
   width: 100px;
   height: 50px;
@@ -220,6 +213,10 @@ input:invalid {
   color: var(--dark-blue);
   font-size: 1.5em;
   justify-self: center;
+}
+
+.read-button-group p {
+  padding: 10px;
 }
 
 /*Card Parent*/
@@ -268,7 +265,6 @@ input:invalid {
 
 .book-cards #card h3 {
   font-family: "Great Vibes";
-  /* font-weight: 400; */
   font-weight: bold;
   font-size: 2em;
 }
@@ -307,6 +303,32 @@ input:invalid {
   width: 30px;
 }
 
+/* Share Modal */
+
+.share-modal {
+  border-radius: 20px;
+  padding: 20px;
+  border-width: 10px;
+  border-color: var(--slug-green);
+}
+
+.share-modal #close-share-modal {
+  width: 30px;
+  text-align: center;
+  border-radius: 20px;
+  font-weight: bold;
+  background-color: var(--slug-green);
+  color: var(--dark-blue);
+  font-size: 1em;
+  justify-self: right;
+}
+
+.share-modal p {
+  font-family: "Great Vibes";
+  font-size: 2em;
+  text-align: center;
+}
+
 /* Right Sidebar */
 
 .right-sidebar {
@@ -318,7 +340,6 @@ input:invalid {
 .announcements {
   text-align: left;
   border-radius: 60px;
-  /*20px*/
   padding: 10px;
   background-color: whitesmoke;
 }

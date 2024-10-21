@@ -3,6 +3,7 @@ const myLibrary = [];
 
 let book;
 const bookCardContainer = document.getElementById("book-cards");
+let have_read = null;
 
 //BOOK CONSTRUCTOR
 function Book(title, author, pages, have_read) {
@@ -35,7 +36,7 @@ function emptyLibrary() {
 }
 
 //HAVE_READ
-let have_read;
+
 function selectHaveRead() {
   document.getElementById("have-read").addEventListener("click", function () {
     have_read = true;
@@ -78,10 +79,13 @@ closeButton.onclick = function () {
 function clearAllInputs() {
   const textInputs = document.querySelectorAll('input[type="text"]');
   const numberInputs = document.querySelectorAll('input[type="number"]');
-  document.getElementById("have-read").style.backgroundColor = "#1f2937"; //dark blue
-  document.getElementById("have-read").style.color = "#F5F5F5"; //whitesmoke
-  document.getElementById("have-not-read").style.backgroundColor = "#1f2937"; //dark blue
-  document.getElementById("have-not-read").style.color = "#F5F5F5"; //whitesmoke
+  if (have_read !== null) {
+    have_read = false;
+    document.getElementById("have-read").style.backgroundColor = "#1f2937"; //dark blue
+    document.getElementById("have-read").style.color = "#F5F5F5"; //whitesmoke
+    document.getElementById("have-not-read").style.backgroundColor = "#1f2937"; //dark blue
+    document.getElementById("have-not-read").style.color = "#F5F5F5"; //whitesmoke
+  }
   textInputs.forEach((singleInput) => (singleInput.value = ""));
   numberInputs.forEach((singleInput) => (singleInput.value = ""));
 }
@@ -166,6 +170,20 @@ function addBookToLibrary() {
         shareButton.setAttribute("aria-label", "Share book card.");
         shareButton.id = "share-button";
         cardButtonDiv.appendChild(shareButton);
+
+        //share modal consts
+        const shareModal = document.getElementById("share-modal");
+        const closeShareButton = document.getElementById("close-share-modal");
+
+        // //open modal
+        shareButton.addEventListener("click", () => {
+          shareModal.style.display = "grid";
+        });
+
+        // //close modal
+        closeShareButton.onclick = function () {
+          shareModal.style.display = "none";
+        };
 
         //delete button
         const deleteBookButton = document.createElement("button");
