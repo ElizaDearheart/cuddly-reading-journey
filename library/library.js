@@ -124,7 +124,11 @@ function addBookToLibrary() {
         bookAuthor.textContent = book.author;
         //book page div
         const bookPages = document.createElement("p");
-        bookPages.textContent = book.pages + " pages";
+        if (pages) {
+          bookPages.textContent = book.pages + " pages";
+        } else {
+          bookPages.textContent = "";
+        }
         //read status div
         const readStatus = document.createElement("p");
         readStatus.id = "read-status";
@@ -220,7 +224,3 @@ function addBookToLibrary() {
 }
 
 addBookToLibrary();
-
-// const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');
-// const prideAndPrejudice = new Book('Pride and Prejudice', 'Jane Austen', '480 pages', 'read');
-// const hamlet = new Book('Hamlet', 'William Shakespeare', '400 pages', 'read');
