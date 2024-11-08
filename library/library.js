@@ -224,3 +224,8 @@ function addBookToLibrary() {
 }
 
 addBookToLibrary();
+
+//Features to add:
+// - "Would you recommend?" field
+// - An option to "favorite" a book.  A heart?
+// - check for negative pages -> snarky error message
