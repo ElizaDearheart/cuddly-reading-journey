@@ -1,53 +1,101 @@
-// store game board
-// factory for players
-// function to keep track of turn
-// function to place marker
-// function to check for win/tie
+////// GameBoard
 
 function GameBoard() {
-  let board = Array(9).fill(" ");
+  let board = ["", "", "", "", "", "", "", "", ""];
 
   const getBoard = () => board;
 
-  const makeMove = (index, symbol) => {
-    console.log(board);
-    if (board[index] === " ") {
-      board[index] = symbol;
-      console.log(board);
-      //return true;
-    } else return;
-  };
-  const printBoard = (symbol) => {
-    let value = "";
-    for (let i = 0; i < board.length; i++) {
-      if (i % 3 === 0 && i !== 0) {
-        value += "\n";
+  const printBoard = (board) => {
+    let output = "";
+
+    for (let i = 0; i < 3; i++) {
+      let row = "";
+      for (let j = 0; j < 3; j++) {
+        row += board[i * 3 + j] || " ";
+        if (j < 2) row += " | ";
       }
-      value += board[symbol] ? board[symbol] : " ";
-      if (i % 3 !== 2) {
-        value += " | ";
-      }
+      output += row + "\n";
+      if (i < 2) output += "--------- \n";
     }
-    console.log(value);
+
+    console.log(output);
+  };
+
+  const makeMove = (index, symbol) => {
+    if (board[index] === "") {
+      board[index] = symbol;
+      return true;
+    } else return false;
+  };
+
+  const checkWin = (board, symbol) => {
+    // winningCombinations =
+    //   [0, 1, 2],
+    //   [3, 4, 5],
+    //   [6, 7, 8],
+    //   [0, 3, 6],
+    //   [1, 4, 7],
+    //   [2, 5, 8],
+    //   [0, 4, 8],
+    //   [2, 4, 6],
+
+    if (board[0] === board[1] && board[0] === board[2] && board[0] === symbol) {
+      return true;
+    } else if (
+      board[3] === board[4] &&
+      board[3] === board[5] &&
+      board[3] === symbol
+    ) {
+      return true;
+    } else if (
+      board[6] === board[7] &&
+      board[6] === board[8] &&
+      board[6] === symbol
+    ) {
+      return true;
+    } else if (
+      board[0] === board[3] &&
+      board[0] === board[6] &&
+      board[0] === symbol
+    ) {
+      return true;
+    } else if (
+      board[1] === board[4] &&
+      board[1] === board[7] &&
+      board[1] === symbol
+    ) {
+      return true;
+    } else if (
+      board[2] === board[5] &&
+      board[2] === board[8] &&
+      board[2] === symbol
+    ) {
+      return true;
+    } else if (
+      board[0] === board[4] &&
+      board[0] === board[8] &&
+      board[0] === symbol
+    ) {
+      return true;
+    } else if (
+      board[2] === board[4] &&
+      board[2] === board[6] &&
+      board[2] === symbol
+    ) {
+      return true;
+    } else return false;
+  };
+
+  const checkTie = (board) => {
+    if (board.some((space) => space === "")) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const resetBoard = () => {
-    board = Array(9).fill(" ");
-  };
-  const checkWin = (symbol) => {
-    const winningCombinations = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    return winningCombinations.some((combination) => {
-      return combination.every((index) => board[index] === symbol);
-    });
+    board = Array(9).fill("");
   };
   return {
     getBoard,
@@ -55,27 +103,29 @@ function GameBoard() {
     resetBoard,
     checkWin,
     printBoard,
+    checkTie,
   };
 }
 
-function GameController(
-  playerOneName = "Player One",
-  playerTwoName = "Player Two",
-) {
-  const board = GameBoard();
+///// Game Controlloer
+
+function GameController(playerX = "Player X", playerO = "Player O") {
+  const gameBoard = GameBoard();
 
   const gamePlayers = [
     {
-      name: playerOneName,
+      name: playerX,
       symbol: "X",
     },
     {
-      name: playerTwoName,
+      name: playerO,
       symbol: "O",
     },
   ];
 
-  let currentPlayer = gamePlayers[0];
+  const chooseFirst = Math.floor(Math.random() * gamePlayers.length);
+
+  let currentPlayer = gamePlayers[chooseFirst];
   const getCurrentPlayer = () => currentPlayer;
 
   const switchPlayer = () => {
@@ -83,23 +133,36 @@ function GameController(
       currentPlayer === gamePlayers[0] ? gamePlayers[1] : gamePlayers[0];
   };
 
-  const printNewRound = (symbol) => {
-    board.printBoard(symbol);
+  const printRound = () => {
+    gameBoard.printBoard(gameBoard.getBoard());
     console.log(`${currentPlayer.name}'s turn.`);
   };
 
   const playRound = (index) => {
-    board.makeMove(index, getCurrentPlayer().symbol);
-    console.log(getCurrentPlayer().symbol);
-
-    board.checkWin();
-    switchPlayer();
-    printNewRound();
+    if (gameBoard.makeMove(index, currentPlayer.symbol)) {
+      if (
+        gameBoard.checkWin(gameBoard.getBoard(), currentPlayer.symbol) === true
+      ) {
+        printRound();
+        console.log(
+          `Contratulations ${currentPlayer.name}!  You win! Do you want to play again?`,
+        );
+        //gameBoard.resetBoard();
+      } else if (gameBoard.checkTie(gameBoard.getBoard()) === false) {
+        console.log("It is a draw.  Game Over");
+      } else {
+        switchPlayer();
+        printRound();
+      }
+    } else {
+      console.log("Move not allowed, please pick a different spot");
+      printRound();
+      return;
+    }
   };
-  printNewRound();
+  printRound();
   return {
     playRound,
-
     getCurrentPlayer,
   };
 }
