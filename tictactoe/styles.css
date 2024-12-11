@@ -1,0 +1,250 @@
+:root {
+  --dark-blue: #1f2937;
+  --pink: #f774ba;
+  --light-pink: #fcc0ee;
+  --light-blue: #b6e4f2;
+  --slug-green: #7bb11d6a;
+  /* whitesmoke color code: #F5F5F5 */
+}
+
+body {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 0;
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-rows: 1fr, 1fr, 4fr, 1fr;
+}
+
+h1 {
+  color: var(--dark-blue);
+}
+
+h2 {
+  color: var(--dark-blue);
+}
+
+h3 {
+  color: var(--dark-blue);
+}
+
+h4 {
+  color: var(--dark-blue);
+}
+
+p {
+  color: var(--dark-blue);
+}
+
+.sh-button {
+  padding: 15px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  background-color: var(--slug-green);
+  color: var(--dark-blue);
+  font-size: 1em;
+  width: 150px;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+input:valid {
+  border: 1px solid lightgray;
+}
+
+input:invalid {
+  border: 1px solid red;
+}
+
+/* Top Header */
+.top-header {
+  background-color: var(--pink);
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  grid-row: 1/2;
+}
+
+.top-header-logo {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.search {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.search img {
+  position: absolute;
+  right: 20px;
+}
+
+.search-bar {
+  height: 48px;
+  border-radius: 30px;
+  font-size: 1.5rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  background-color: whitesmoke;
+  padding-left: 10px;
+}
+
+.top-header-links {
+  display: flex;
+  margin-left: auto;
+  margin-right: 20px;
+  align-items: center;
+  color: #e5e7eb;
+  font-size: 1.5em;
+}
+
+/* Secondary Header*/
+.secondary-header {
+  grid-row: 2/3;
+  background-color: whitesmoke;
+  display: grid;
+  grid-template-columns: 2fr 2fr 5fr;
+  padding-left: 2em;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-color: darkgray;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.sh-button-group {
+  display: flex;
+  flex-direction: row;
+  grid-column: 3/4;
+  gap: 15px;
+  justify-self: right;
+  align-self: center;
+  padding-right: 30px;
+  padding-top: 50px;
+}
+
+.name {
+  grid-column: 1/2;
+  font-size: 2em;
+  font-weight: 700;
+  color: var(--dark-blue);
+  border-right-color: darkgrey;
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+/* Game Space */
+.game-space {
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+  /* grid-template-columns: 4fr 1fr; */
+  background-color: var(--light-blue);
+  gap: 15px;
+  padding: 10px;
+}
+
+.game-space h1 {
+  grid-row: 1/2;
+  font-family: "Great Vibes";
+  font-weight: bold;
+  font-size: 4.5em;
+  text-align: center;
+}
+
+/* Game Group */
+
+.game-group {
+  grid-row: 2/2;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+}
+
+/* Game */
+
+.game {
+  background-color: whitesmoke;
+  border-color: darkgrey;
+  border-width: 1px;
+  border-style: solid;
+  padding: 20px;
+}
+
+.game-name {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}
+
+.turn {
+  text-align: center;
+  padding: 0.5em;
+}
+
+.board {
+  /* locally scoped variables */
+  --gap: 2em;
+  --line-offset: calc(var(--gap) / 2);
+  --line-thickness: 1px;
+  --line-color: black;
+  /* grid layout */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  row-gap: var(--gap);
+  /* justify-items: center; */
+  overflow: hidden;
+}
+
+.square {
+  width: 12em;
+  height: 5em;
+  position: relative;
+
+  /* border: none; */
+}
+
+.square button {
+  color: var(--dark-blue);
+}
+
+.square::before,
+.square::after {
+  content: "";
+  position: absolute;
+  background-color: var(--line-color);
+  z-index: 1;
+}
+
+/* row borders */
+.square::after {
+  block-size: var(--line-thickness);
+  inline-size: 100vw;
+  inset-inline-start: 0;
+  inset-block-start: calc(var(--line-offset) * -1);
+}
+
+/* column borders */
+.square::before {
+  inline-size: var(--line-thickness);
+  block-size: 100vh;
+  inset-block-start: 0;
+  inset-inline-start: calc(var(--line-offset) * -1);
+}
+
+/* Footer */
+
+.footer {
+  background-color: var(--pink);
+  grid-column: 1/2;
+  height: 72px;
+}
