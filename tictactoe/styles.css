@@ -173,6 +173,8 @@ input:invalid {
 /* Game */
 
 .game {
+  display: flex;
+  flex-direction: column;
   background-color: whitesmoke;
   border-color: darkgrey;
   border-width: 1px;
@@ -189,7 +191,32 @@ input:invalid {
 .turn {
   text-align: center;
   padding: 0.5em;
+  font-family: "Great Vibes";
+  font-weight: bold;
+  font-size: 2em;
 }
+
+.reset-button {
+  padding: 15px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  background-color: var(--slug-green);
+  color: var(--dark-blue);
+  font-size: 1em;
+  width: 150px;
+  margin-top: 40px;
+  align-self: center;
+}
+
+.message {
+  text-align: center;
+  padding: 0.5em;
+  font-family: "Great Vibes";
+  font-weight: bold;
+  font-size: 2.5em;
+}
+
+/* Tic Tac Toe Gameboard */
 
 .board {
   /* locally scoped variables */
@@ -201,20 +228,20 @@ input:invalid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   row-gap: var(--gap);
-  /* justify-items: center; */
   overflow: hidden;
 }
 
 .square {
-  width: 12em;
-  height: 5em;
+  /* width: 10em;
+  height: 5em; */
+  width: 150px;
+  height: 40px;
   position: relative;
-
-  /* border: none; */
-}
-
-.square button {
   color: var(--dark-blue);
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  background-color: whitesmoke;
 }
 
 .square::before,

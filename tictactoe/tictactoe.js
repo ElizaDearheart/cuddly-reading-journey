@@ -1,4 +1,4 @@
-////// GameBoard
+///// GameBoard
 
 function GameBoard() {
   let board = ["", "", "", "", "", "", "", "", ""];
@@ -99,11 +99,11 @@ function GameBoard() {
   };
   return {
     getBoard,
-    makeMove,
-    resetBoard,
-    checkWin,
     printBoard,
+    makeMove,
+    checkWin,
     checkTie,
+    resetBoard,
   };
 }
 
@@ -127,6 +127,7 @@ function GameController(playerX = "Player X", playerO = "Player O") {
 
   let currentPlayer = gamePlayers[chooseFirst];
   const getCurrentPlayer = () => currentPlayer;
+  const getCurrentPlayerSymbol = () => currentPlayer.symbol;
 
   const switchPlayer = () => {
     currentPlayer =
@@ -139,32 +140,96 @@ function GameController(playerX = "Player X", playerO = "Player O") {
   };
 
   const playRound = (index) => {
+    let gameMessage;
+    let gameOver;
     if (gameBoard.makeMove(index, currentPlayer.symbol)) {
       if (
         gameBoard.checkWin(gameBoard.getBoard(), currentPlayer.symbol) === true
       ) {
         printRound();
-        console.log(
-          `Contratulations ${currentPlayer.name}!  You win! Do you want to play again?`,
-        );
-        //gameBoard.resetBoard();
+        gameMessage = `Contratulations ${currentPlayer.name}, you won!`;
+        gameOver = true; //TODO: reassess need.  Not used atm.
       } else if (gameBoard.checkTie(gameBoard.getBoard()) === false) {
-        console.log("It is a draw.  Game Over");
+        gameMessage = "It's a draw.  Game Over.";
       } else {
         switchPlayer();
         printRound();
       }
     } else {
-      console.log("Move not allowed, please pick a different spot");
       printRound();
-      return;
+      gameMessage = `Move not allowed, ${currentPlayer.name}, please pick a different square...`;
     }
+    return { gameMessage, gameOver };
   };
   printRound();
+
   return {
     playRound,
     getCurrentPlayer,
+    getCurrentPlayerSymbol,
+    getBoard: gameBoard.getBoard,
+    resetBoard: gameBoard.resetBoard,
   };
 }
 
-const game = GameController();
+///// Display Controller
+
+function DisplayController() {
+  const game = GameController();
+  const playerTurnDiv = document.querySelector(".turn");
+  const messageDiv = document.querySelector(".message");
+  const boardDiv = document.querySelector(".board");
+  const resetButton = document.querySelector(".reset-button");
+  resetButton.textContent = "New Game";
+  let message;
+
+  // display name of game
+  const gameName = document.querySelector(".game-name");
+  gameName.textContent = "Tic Tac Toe";
+
+  const updateScreen = () => {
+    // clear board
+    boardDiv.textContent = "";
+
+    // get gameboard and current player
+    const board = game.getBoard();
+    const currentPlayer = game.getCurrentPlayer();
+
+    // display player's turn
+    playerTurnDiv.textContent = `${currentPlayer.name}'s turn`;
+
+    // display board
+    board.forEach((space, index) => {
+      const squareButton = document.createElement("button");
+      squareButton.classList.add("square");
+      squareButton.dataset.indexNumber = index;
+
+      squareButton.textContent = space;
+      boardDiv.appendChild(squareButton);
+    });
+  };
+  function clickSquare(e) {
+    const selectedSquare = e.target.dataset.indexNumber;
+    if (!selectedSquare) {
+      return;
+    }
+
+    const currentGame = game.playRound(selectedSquare);
+    message = currentGame.gameMessage;
+    // const gameOver = currentGame.gameOver;
+
+    messageDiv.textContent = message;
+    updateScreen();
+  }
+  //event listeners
+  boardDiv.addEventListener("click", clickSquare);
+
+  resetButton.addEventListener("click", () => {
+    messageDiv.textContent = "";
+    DisplayController();
+  });
+
+  //initial render
+  updateScreen();
+}
+DisplayController();
