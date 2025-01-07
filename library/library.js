@@ -5,20 +5,22 @@ let book;
 const bookCardContainer = document.getElementById("book-cards");
 let have_read = null;
 
-//BOOK CONSTRUCTOR
-function Book(title, author, pages, have_read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.have_read = Boolean(have_read);
-  this.info = function () {
-    return `${this.title}, ${this.author}, ${this.pages}, ${this.have_read}`;
-  };
+//BOOK CLASS
+class Book {
+  constructor(title, author, pages, have_read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.have_read = Boolean(have_read);
+    this.info = function () {
+      return `${this.title}, ${this.author}, ${this.pages}, ${this.have_read}`;
+    };
+  }
+  //Method
+  clickedHaveRead() {
+    this.have_read = !this.have_read;
+  }
 }
-
-Book.prototype.click = function () {
-  this.have_read = !this.have_read;
-};
 
 // CHECK FOR EMPTY LIBRARY
 const emptyLibraryContainer = document.getElementById("card-parent");
@@ -55,8 +57,6 @@ function selectHaveRead() {
       document.getElementById("have-read").style.backgroundColor = "#1f2937"; //dark blue
       document.getElementById("have-read").style.color = "#F5F5F5"; //whitesmoke
     });
-
-  console.log(have_read);
 }
 
 //BOOK MODAL
@@ -65,7 +65,7 @@ const addBookButton = document.getElementById("add-book");
 const closeButton = document.getElementById("close-book-modal");
 
 //open modal
-// selectHaveRead() must be called here, when modal is initialized
+//note//selectHaveRead() must be called here, when modal is initialized
 addBookButton.onclick = function () {
   addBookModal.style.display = "grid";
   selectHaveRead();
@@ -73,6 +73,7 @@ addBookButton.onclick = function () {
 //close modal button
 closeButton.onclick = function () {
   addBookModal.style.display = "none";
+  clearAllInputs();
 };
 
 //clear modal functions
@@ -105,11 +106,9 @@ function addBookToLibrary() {
       const pages = document.getElementById("pages").value;
 
       // add new book to library
-      book = new Book(title, author, pages, have_read);
+      book = new Book();
       myLibrary.push(book);
       const index = myLibrary.indexOf(book);
-
-      console.log(book.have_read);
 
       // add card to page
       function createBookCard() {
@@ -118,14 +117,14 @@ function addBookToLibrary() {
         bookDiv.dataset.id = Math.random().toString(36).substring(5, 22);
         //book title div
         const bookTitle = document.createElement("h3");
-        bookTitle.textContent = book.title;
+        bookTitle.textContent = title;
         //book author div
         const bookAuthor = document.createElement("p");
-        bookAuthor.textContent = book.author;
+        bookAuthor.textContent = author;
         //book page div
         const bookPages = document.createElement("p");
         if (pages) {
-          bookPages.textContent = book.pages + " pages";
+          bookPages.textContent = pages + " pages";
         } else {
           bookPages.textContent = "";
         }
@@ -156,7 +155,7 @@ function addBookToLibrary() {
         cardButtonDiv.appendChild(readStatusButton);
 
         readStatusButton.addEventListener("click", () => {
-          book.click();
+          book.clickedHaveRead();
           document.getElementById("read-status");
           if (book.have_read == true) {
             readStatus.textContent = "Read it!";
@@ -229,3 +228,6 @@ addBookToLibrary();
 // - "Would you recommend?" field
 // - An option to "favorite" a book.  A heart?
 // - check for negative pages -> snarky error message
+
+//To do:
+// - update to remove global variables and encapsalate code into functions
